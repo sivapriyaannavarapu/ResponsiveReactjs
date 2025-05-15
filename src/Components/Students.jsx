@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Students.css';
 import State from '../assets/State.png';
@@ -13,35 +13,14 @@ import ProgramName from '../assets/ProgramName.png';
 import ExamProgram from '../assets/ExamProgram.png';
 import CourseTrack from '../assets/CourseTrack.png';
 import search from '../assets/search.png';
+import Footer from './Footer';
+import Sidebar from './Sidebar';
 
 const Students = () => {
   const navigate = useNavigate();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 360);
- 
-  useEffect(() => {
-    console.log('useEffect is running');
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 360);
-    };
- 
-    const handleScroll = () => {
-      console.log('Scroll position:', window.scrollY);
-      setIsScrolled(window.scrollY > 50);
-    };
-    
-    console.log('Adding scroll event listener');
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", checkMobile);
- 
-    checkMobile();
- 
-    return () => {
-      console.log('Removing scroll event listener');
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", checkMobile);
-    };
-  }, []);
+  const headerRef = useRef(null);
+  const wrapperRef = useRef(null);
+  const lastScrollTop = useRef(0);
 
   const cardData = [
     {
@@ -108,21 +87,102 @@ const Students = () => {
     }
   };
 
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       if (!wrapperRef.current || !headerRef.current) return;
+
+//       const currentScrollTop = wrapperRef.current.scrollTop;
+
+//       if (Math.abs(currentScrollTop - lastScrollTop.current) < 5) return;
+
+//       if (currentScrollTop > lastScrollTop.current) {
+
+//   headerRef.current.classList.add('scrolled-up');
+// } else {
+
+//   headerRef.current.classList.remove('scrolled-up');
+// }
+
+
+   
+//       if (currentScrollTop <= 0) {
+//         headerRef.current.classList.remove('scrolled-up');
+//       }
+
+//       lastScrollTop.current = currentScrollTop <= 0? 0 : currentScrollTop;
+//     };
+
+//     const wrapperElement = wrapperRef.current;
+//     if (wrapperElement) {
+     
+//       if (headerRef.current) {
+//         headerRef.current.classList.remove('scrolled-up');
+//       }
+//       wrapperElement.addEventListener('scroll', handleScroll);
+//     }
+
+//     return () => {
+//       if (wrapperElement) {
+//         wrapperElement.removeEventListener('scroll', handleScroll);
+//       }
+//     };
+//   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!wrapperRef.current || !headerRef.current) return;
+
+      const currentScrollTop = wrapperRef.current.scrollTop;
+
+      // Debounce small scroll changes
+      if (Math.abs(currentScrollTop - lastScrollTop.current) < 5) return;
+
+      // Apply scrolled-up after 30px downward scroll
+      if (currentScrollTop > 50 && currentScrollTop > lastScrollTop.current) {
+        headerRef.current.classList.add('scrolled-up');
+        wrapperRef.current.classList.add('scrolled-up');
+      } else {
+        // Remove scrolled-up when scrolling up or near top
+        headerRef.current.classList.remove('scrolled-up');
+        wrapperRef.current.classList.remove('scrolled-up');
+      }
+
+      // Ensure expanded state at the top
+      if (currentScrollTop <= 0) {
+        headerRef.current.classList.remove('scrolled-up');
+        wrapperRef.current.classList.remove('scrolled-up');
+      }
+
+      lastScrollTop.current = currentScrollTop <= 0 ? 0 : currentScrollTop;
+    };
+
+    const wrapperElement = wrapperRef.current;
+    if (wrapperElement) {
+      // Set initial expanded state
+      if (headerRef.current) {
+        headerRef.current.classList.remove('scrolled-up');
+      }
+      wrapperElement.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (wrapperElement) {
+        wrapperElement.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
+
   return (
-    <div className="students-wrapper">
-      <div className={`students-header-section ${isScrolled && isMobile ? 'scrolled' : ''}`}>
-        <div className='header-content'>
+    <div className="students-wrapper" ref={wrapperRef}>
+      <div className="students-header-section" ref={headerRef}>
         <h1 className="students-header">Students Masters</h1>
-        {(!isScrolled || !isMobile) && (
-          <p className="students-subtext">
-            Access and manage comprehensive student details seamlessly. View personalized profiles tailored to your campus.
-          </p>
-        )}
+        <p className="students-subtext">
+          Access and manage comprehensive student details seamlessly. View personalized profiles tailored to your campus.
+        </p>
         <div className="search">
           <img src={search} alt="Search" className="search-icon" />
           <input type="text" placeholder="Search for the module" className="search-bar" />
         </div>
-      </div>
       </div>
       <div className="card-grid-section">
         <div className="card-grid">
@@ -141,6 +201,7 @@ const Students = () => {
         </div>
       </div>
     </div>
+    
   );
 };
 

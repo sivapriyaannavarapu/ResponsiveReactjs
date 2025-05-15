@@ -5,6 +5,8 @@
   background: #f6f8fc;
   min-height: 100vh;
   padding-left: 10px;
+  overflow-y: auto;
+  max-height: 100vh;
 }
 
 .students-header-section {
@@ -18,10 +20,11 @@
   background-position: right;
   background-size: auto;
   margin-bottom: 10px;
-  position: sticky;
-    z-index: 100;
-    transition: all 0.3s ease;
-  will-change: transform, opacity; 
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  
+  
 }
 
 .students-header {
@@ -30,10 +33,7 @@
   margin-bottom: 0.2rem;
   color: #252C32;
   font-family: 'Inter', sans-serif;
-}
-
-.header-content {
-  transition: all 0.3s ease;
+  transition: font-size 0.3s ease-in-out, margin-top 0.3s ease-in-out;
 }
 
 .students-subtext {
@@ -44,6 +44,7 @@
   line-height: 100%;
   letter-spacing: -0.6%;
   color: #6E7C87;
+  transition: opacity 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out;
 }
 
 .search {
@@ -51,6 +52,27 @@
   width: 321px;
   margin-left: 2px;
   margin-bottom: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 8px 8px 8px 40px;
+  border: 1px solid #ddd;
+  border-radius: 31px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease-in-out;
 }
 
 .card-grid-section {
@@ -113,30 +135,38 @@
   margin-top: 10px;
 }
 
-/* @media (min-width: 361px) {
-  .students-wrapper {
-    padding-left: 1rem;
-    margin-bottom: 0;
-  }
+/* Styles for the scrolled-up state */
+.students-header-section.scrolled-up {
+  height: 60px;
+  padding: 0.5rem;
+  margin-top: 0;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  top:0;
+}
 
-  .card-grid {
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    max-width: 1112px;
-  }
+.students-header-section.scrolled-up .students-header {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
-  .card {
-    width: 269px;
-    height: 145px;
-  }
+.students-header-section.scrolled-up .students-subtext {
+  opacity: 0;
+  height: 0;
+  width: 0;
+  margin: 0;
+}
 
-  .students-header {
-    font-size: 32px;
-  }
-
-  .search {
-    width: 321px;
-  }
-} */
+.students-header-section.scrolled-up .search {
+  width: 160px;
+  height: 32px;
+  margin: 0;
+  margin-left: auto;
+}
 
 @media (max-width: 360px) {
   .students-wrapper {
@@ -145,18 +175,19 @@
   }
 
   .students-header-section {
-    width: 93%;
+    width: 85%;
     height: 148px;
-    top: 0;
-    left: 10px;
+    /* top: 57px; */
+    left: 0px;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
     border-right-width: 1px;
     border-bottom-width: 1px;
     border-left-width: 1px;
     margin-top: -10px;
-     transition: all 0.3s ease, height 0.3s ease;
-    
+    top:57px;
+    position: fixed;
+    margin-left: 10px;
   }
 
   .students-header {
@@ -198,6 +229,7 @@
 
   .card-grid-section {
     width: 90%;
+    margin-top: 200px;
   }
 
   .card-grid {
@@ -254,33 +286,40 @@
     margin-top: 10px;
   }
 
-  .students-header-section.scrolled {
-    padding: 10px 16px;
-    background-image: none;
-    position: fixed;
-    top: 57px;
-    background-image: url(../assets/1x.png);
-  }
- 
-  .students-header-section.scrolled .header-content {
-    display: flex;
+  .students-header-section.scrolled-up {
+    height: 50px;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    padding-right:24px;
+    top: 57px;
   }
- 
-  .students-header-section.scrolled .students-header {
+
+  .students-header-section.scrolled-up .students-header {
     font-size: 18px;
-    margin: 0;
-    flex: 1;
   }
- 
-  .students-header-section.scrolled .search {
-    width: 50%;
-    margin: 0;
+
+  .students-header-section.scrolled-up .students-subtext {
+    opacity: 0;
+    height: 0;
+    width: 0;
   }
- 
-  .students-header-section.scrolled .students-subtext {
-    display: none;
+
+  .students-header-section.scrolled-up .search {
+    width: 120px;
+    height: 28px;
+    padding-right: 40px;
+    padding-bottom: 0;
+  }
+
+  .students-header-section.scrolled-up .search-bar {
+    padding: 6px 6px 6px 30px;
+    font-size: 12px;
+  }
+
+  .students-header-section.scrolled-up .search-icon {
+    width: 16px;
+    height: 16px;
+    left: 8px;
+    padding-top: 10px;
   }
 }
