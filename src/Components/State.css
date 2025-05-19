@@ -14,6 +14,7 @@
   min-height: 540px;
   max-height: 540px;
   position: relative;
+  transition: all 0.3s ease-in-out;
 }
 
 .state-table {
@@ -133,6 +134,9 @@
   background-position: right;
   background-size: contain;
   position: sticky;
+  top: 0;
+  transition: all 0.3s ease-in-out;
+  z-index:999;
 }
 
 .breadcrumb-wrapper {
@@ -141,6 +145,7 @@
   font-size: 14px;
   color: #6b7280;
   gap: 5px;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .breadcrumb-link {
@@ -150,10 +155,6 @@
   line-height: 100%;
   letter-spacing: -0.6%;
   color: #6e7c87;
-}
-
-.breadcrumb-separator {
-  color: #9ca3af;
 }
 
 .breadcrumb-current {
@@ -171,6 +172,7 @@
   margin-bottom: 0.2rem;
   color: #252c32;
   font-family: 'Inter', sans-serif;
+  transition: font-size 0.3s ease-in-out;
 }
 
 .state-description {
@@ -179,13 +181,14 @@
   font-size: 16px;
   line-height: 24px;
   color: #6e7c87;
+  /* transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out; */
 }
 
 .state-buttons {
   display: flex;
   gap: 10px;
   margin-top: 15px;
-  position: sticky;
+  transition: all 0.3s ease-in-out;
 }
 
 .state-buttons .btn {
@@ -196,6 +199,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  transition: all 0.3s ease-in-out;
 }
 
 .state-buttons .btn img {
@@ -253,27 +257,6 @@
   background-color: #c3d4fa;
 }
 
-.state-search {
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.state-search input {
-  padding: 8px 14px;
-  width: 250px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 14px;
-  font-family: 'Inter', sans-serif;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.state-search input:focus {
-  border-color: #4f46e5;
-}
-
 .action-buttons {
   display: flex;
   gap: 8px;
@@ -297,7 +280,7 @@
 }
 
 .icon-button:hover {
-  background-color: #f3f4f6;
+  background-color: #f3f4f4;
 }
 
 .pro-tip-box {
@@ -340,6 +323,7 @@
   line-height: 18px;
   letter-spacing: 0%;
   vertical-align: middle;
+  width: 10%;
 }
 
 .btn.pagination-btn {
@@ -358,15 +342,281 @@
   border: 1px solid #1b1f2426;
 }
 
-.pro-tip-conatiner {
+.pro-tip-container {
   width: 986px;
-  height: 32px;
+  height: 66px;
   top: 573px;
   justify-content: space-between;
 }
 
-@media (max-width: 768px) {
- .sidebar{
-  display: none;
- }
+/* Media queries for mobile */
+@media (max-width: 360px) {
+  .sidebar {
+    display: none;
   }
+
+  .state-table th:nth-child(1),
+.state-table td:nth-child(1) {
+  position: sticky;
+  left:0;
+}
+
+.state-table th {
+    height: 37px; /* Reduced from 43px */
+    font-size: 12px; /* Slightly smaller font for compactness */
+    padding-top: 12px; /* Reduced from 21px */
+  }
+
+  .state-table td {
+    height: 38px; /* Reduced from 38px */
+    padding: 6px; /* Reduced from 10px */
+    padding-top: 2px; /* Reduced from 3px */
+    font-size: 12px; /* Slightly smaller font for compactness */
+  }
+
+  .state-page {
+    padding-bottom: 80px; /* Non-expanded footer */
+  }
+
+  .state-header {
+    margin-bottom: 2rem;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    background-image: url(../assets/1x.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+    position: sticky;
+  }
+
+  .breadcrumb-wrapper {
+    display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #6b7280;
+  gap: 5px;
+  transition: opacity 0.3s ease-in-out;
+  }
+
+  .state-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+    color: #252c32;
+    font-family: 'Inter', sans-serif;
+    width: 185px;
+    height: 27px;
+    font-weight: 700;
+    line-height: 100%;
+    letter-spacing: -2.2%;
+    margin-top: 0.5rem;
+  }
+
+  .state-description {
+    font-family: 'Inter', sans-serif;
+    color: #6e7c87;
+    width: 266px;
+    height: 45px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: -0.6%;
+    color: #252C32;
+  }
+
+  .state-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  transition: all 0.3s ease-in-out;
+  /* width:92%; */
+}
+
+.state-buttons .btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.state-buttons .btn img {
+  height: 16px;
+  margin-left:-7px;
+}
+
+.btn.filter {
+  position: relative;
+  background-color: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #f76659;
+  color: #fff;
+  font-size: 8px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 5px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn.export {
+  background-color: #f3f4f6;
+  width: 96px;
+  height: 39px;
+  border-radius: 6px;
+  border-width: 1px;
+  gap: 8px;
+  padding-top: 4px;
+  padding-right: 12px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+}
+
+.btn.add {
+  background-color: #4f46e5;
+  color: white;
+  border-radius: 6px;
+  padding: 4px 12px;
+  width: 182px;
+        margin-right: -9px;
+}
+
+  .btn.add-clicked {
+    background-color: #c3d4fa;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-left: 0px;
+    margin-top: 0px;
+    align-items: center;
+    overflow: hidden;
+    border-left: 1px solid #e5e7eb;
+    height: 26px;
+    gap: 11px;
+  }
+
+  .icon-button {
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+  }
+
+  .icon-button:hover {
+    background-color: #f3f4f6;
+  }
+
+  /* Scrolled-up state for mobile */
+  .state-header.scrolled-up {
+    height: 70px;
+    padding: 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background-image: none;
+    top: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    z-index:999;
+  }
+
+  .state-header.scrolled-up .breadcrumb-wrapper {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+  }
+
+  .state-header.scrolled-up .state-title {
+    font-size: 18px;
+    margin: 0;
+    margin-bottom: 6px;
+  }
+
+  .state-header.scrolled-up .state-description {
+    opacity: 0;
+    height: 0;
+    width: 0;
+    margin: 0;
+  }
+
+  .state-header.scrolled-up .state-buttons {
+    margin: 0;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .state-header.scrolled-up .btn.filter {
+    width: 22%;
+    height: 24px;
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .state-header.scrolled-up .btn.export {
+    width: auto;
+    height: 24px;
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .state-header.scrolled-up .btn.add {
+    width: auto;
+    height: 24px;
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .state-table-wrapper.scrolled-up {
+    margin-top: -23px; /* Increased to ensure table stops below shrunken header */
+  }
+  
+.pagination {
+  display: flex;
+  flex-direction: row; /* Align items horizontally */
+  align-items: center; /* Vertically center the items */
+  gap: 10px; /* Space between elements */
+  padding: 10px; /* Optional: Add padding for better spacing */
+}
+
+.pagination-info {
+  margin: 0; /* Remove margins */
+  width: auto; /* Allow natural width */
+  white-space: nowrap; /* Prevent text from wrapping */
+  font-size: 14px; /* Optional: Ensure readable size */
+  margin-left:140px;
+}
+
+
+.pagination-buttons {
+  display: flex; /* Ensure buttons are in a row */
+  gap: 8px; /* Space between buttons */
+}
+
+.pro-tip-container {
+  display: none; /* Keep ProTip hidden */
+}
+}

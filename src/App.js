@@ -94,6 +94,7 @@ function App() {
           </div>
           <div className="main-content">
             <Routes>
+              
               {/* Route for Students Page */}
               <Route path="/students" element={<Student />} />
 

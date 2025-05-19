@@ -140,6 +140,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AddField.css';
+import Footer from './Footer';
 
 const AddField = ({ onAddState }) => {
   const navigate = useNavigate();
@@ -207,6 +208,7 @@ const AddField = ({ onAddState }) => {
           </tbody>
         </table>
       </form>
+      <Footer/>
     </div>
   );
 };

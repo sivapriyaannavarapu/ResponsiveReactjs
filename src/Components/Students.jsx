@@ -85,48 +85,7 @@ const Students = () => {
     if (card.route) {
       navigate(card.route);
     }
-  };
-
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       if (!wrapperRef.current || !headerRef.current) return;
-
-//       const currentScrollTop = wrapperRef.current.scrollTop;
-
-//       if (Math.abs(currentScrollTop - lastScrollTop.current) < 5) return;
-
-//       if (currentScrollTop > lastScrollTop.current) {
-
-//   headerRef.current.classList.add('scrolled-up');
-// } else {
-
-//   headerRef.current.classList.remove('scrolled-up');
-// }
-
-
-   
-//       if (currentScrollTop <= 0) {
-//         headerRef.current.classList.remove('scrolled-up');
-//       }
-
-//       lastScrollTop.current = currentScrollTop <= 0? 0 : currentScrollTop;
-//     };
-
-//     const wrapperElement = wrapperRef.current;
-//     if (wrapperElement) {
-     
-//       if (headerRef.current) {
-//         headerRef.current.classList.remove('scrolled-up');
-//       }
-//       wrapperElement.addEventListener('scroll', handleScroll);
-//     }
-
-//     return () => {
-//       if (wrapperElement) {
-//         wrapperElement.removeEventListener('scroll', handleScroll);
-//       }
-//     };
-//   }, []);
+  }; 
 
   useEffect(() => {
     const handleScroll = () => {
@@ -200,6 +159,7 @@ const Students = () => {
           ))}
         </div>
       </div>
+       <Footer isVisible={true}/>
     </div>
     
   );
